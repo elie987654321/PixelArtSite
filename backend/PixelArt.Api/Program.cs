@@ -13,6 +13,16 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
+// Allow the Angular dev server (http://localhost:4200) to call this API.
+const string FrontendCors = "frontend";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(FrontendCors, policy =>
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod());
+});
+
 var app = builder.Build();
 
 // Apply any pending EF Core migrations on startup so the database
@@ -31,6 +41,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(FrontendCors);
 
 app.UseAuthorization();
 
