@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelArt.Api", "PixelArt.Api\PixelArt.Api.csproj", "{0C87B0A3-148C-4C5C-8A9C-63DA690ECCCD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelArt.Api.Tests", "PixelArt.Api.Tests\PixelArt.Api.Tests.csproj", "{464EAA3E-D5B0-42CF-A489-5C99FB63041F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,18 @@ Global
 		{0C87B0A3-148C-4C5C-8A9C-63DA690ECCCD}.Release|x64.Build.0 = Release|Any CPU
 		{0C87B0A3-148C-4C5C-8A9C-63DA690ECCCD}.Release|x86.ActiveCfg = Release|Any CPU
 		{0C87B0A3-148C-4C5C-8A9C-63DA690ECCCD}.Release|x86.Build.0 = Release|Any CPU
+		{464EAA3E-D5B0-42CF-A489-5C99FB63041F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{464EAA3E-D5B0-42CF-A489-5C99FB63041F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{464EAA3E-D5B0-42CF-A489-5C99FB63041F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{464EAA3E-D5B0-42CF-A489-5C99FB63041F}.Debug|x64.Build.0 = Debug|Any CPU
+		{464EAA3E-D5B0-42CF-A489-5C99FB63041F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{464EAA3E-D5B0-42CF-A489-5C99FB63041F}.Debug|x86.Build.0 = Debug|Any CPU
+		{464EAA3E-D5B0-42CF-A489-5C99FB63041F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{464EAA3E-D5B0-42CF-A489-5C99FB63041F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{464EAA3E-D5B0-42CF-A489-5C99FB63041F}.Release|x64.ActiveCfg = Release|Any CPU
+		{464EAA3E-D5B0-42CF-A489-5C99FB63041F}.Release|x64.Build.0 = Release|Any CPU
+		{464EAA3E-D5B0-42CF-A489-5C99FB63041F}.Release|x86.ActiveCfg = Release|Any CPU
+		{464EAA3E-D5B0-42CF-A489-5C99FB63041F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

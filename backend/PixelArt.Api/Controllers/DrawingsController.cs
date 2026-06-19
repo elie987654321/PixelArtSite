@@ -42,7 +42,7 @@ public class DrawingsController : ControllerBase
             Name = input.Name,
             Width = input.Width,
             Height = input.Height,
-            PixelData = input.PixelData
+            Pixels = input.Pixels
         };
 
         _db.Drawings.Add(drawing);
@@ -60,7 +60,7 @@ public class DrawingsController : ControllerBase
         drawing.Name = input.Name;
         drawing.Width = input.Width;
         drawing.Height = input.Height;
-        drawing.PixelData = input.PixelData;
+        drawing.Pixels = input.Pixels;
 
         await _db.SaveChangesAsync();
         return NoContent();

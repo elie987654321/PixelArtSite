@@ -1,3 +1,5 @@
+using PixelArt.Api.Models;
+
 namespace PixelArt.Api.Dtos;
 
 // Input model for creating/updating a Drawing.
@@ -11,5 +13,5 @@ public class DrawingCreateDto
 
     public int Height { get; set; }
 
-    public string PixelData { get; set; } = string.Empty;
+    public Pixel[][] Pixels { get; set; } = [];
 }
