@@ -1,0 +1,25 @@
+<div class="page">
+  <header class="masthead">
+    <p class="eyebrow"><a routerLink="/" class="link">PixelArt</a> &middot; gallery</p>
+    <h1 class="title">The collection.</h1>
+  </header>
+
+  <main>
+    @if (loading) {
+      <p class="status">Loading drawings…</p>
+    } @else if (error) {
+      <p class="status status--error">{{ error }}</p>
+    } @else if (drawings.length === 0) {
+      <div class="empty">
+        <p class="status">No drawings yet.</p>
+        <p class="hint"><a routerLink="/create" class="link">Make the first one &rarr;</a></p>
+      </div>
+    } @else {
+      <section class="gallery">
+        @for (drawing of drawings; track drawing.id) {
+          <app-drawing-view [drawing]="drawing" />
+        }
+      </section>
+    }
+  </main>
+</div>
