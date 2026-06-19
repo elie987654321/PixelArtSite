@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { Drawing } from '../drawing.model';
+import { Drawing } from '../model/drawing.model';
 
 @Component({
   selector: 'app-drawing-view',

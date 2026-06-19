@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Drawing } from './drawing.model';
+import { Drawing } from '../model/drawing.model';
 
 @Injectable({ providedIn: 'root' })
 export class DrawingService {

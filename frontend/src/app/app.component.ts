@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DrawingService } from './drawing.service';
-import { Drawing } from './drawing.model';
+import { DrawingService } from './service/drawing.service';
+import { Drawing } from './model/drawing.model';
 import { DrawingViewComponent } from './drawing-view/drawing-view.component';
 
 @Component({
