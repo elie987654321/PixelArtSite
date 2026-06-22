@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { PixelEditorComponent } from '../pixel-editor/pixel-editor.component';
 
 export interface DrawingOptions {
   name: string;
@@ -10,7 +11,7 @@ export interface DrawingOptions {
 @Component({
   selector: 'app-drawing-options',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, PixelEditorComponent],
   templateUrl: './drawing-options.component.html',
   styleUrl: './drawing-options.component.css',
 })

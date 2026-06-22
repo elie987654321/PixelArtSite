@@ -60,8 +60,8 @@
         <button class="submit" type="submit">Start drawing</button>
       </form>
     } @else {
-      <p class="status">“{{ chosen.name }}” — canvas {{ chosen.width }}&times;{{ chosen.height }} ready.</p>
-      <p class="hint">The drawing canvas isn't built yet — that's the next step.</p>
+      <p class="status">“{{ chosen.name }}” — {{ chosen.width }}&times;{{ chosen.height }}</p>
+      <app-pixel-editor [width]="chosen.width" [height]="chosen.height" />
     }
   </main>
 </div>

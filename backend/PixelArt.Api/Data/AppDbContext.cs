@@ -16,13 +16,11 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        var converter = new ValueConverter<Pixel[][], string>(
+        var converter = new ValueConverter<string[][], string>(
             grid => JsonSerializer.Serialize(grid, (JsonSerializerOptions?)null),
-            json => JsonSerializer.Deserialize<Pixel[][]>(json, (JsonSerializerOptions?)null) ?? Array.Empty<Pixel[]>());
+            json => JsonSerializer.Deserialize<string[][]>(json, (JsonSerializerOptions?)null) ?? Array.Empty<string[]>());
 
-        // EF tracks changes by reference by default; arrays need a value comparer
-        // so edits to the grid's contents are detected and saved. Compare and copy
-        var comparer = new ValueComparer<Pixel[][]>(
+        var comparer = new ValueComparer<string[][]>(
             (a, b) => PixelGrid.AreEqual(a, b),
             grid => PixelGrid.ComputeHashCode(grid),
             grid => PixelGrid.DeepCopy(grid));

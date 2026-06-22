@@ -8,9 +8,9 @@ public class Drawing
 
     public int Width { get; set; }
 
-    public int Height { get; set;} 
+    public int Height { get; set; }
 
-    public Pixel[][] Pixels { get; set; } = [];
+    public string[][] Pixels { get; set; } = [];
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }
