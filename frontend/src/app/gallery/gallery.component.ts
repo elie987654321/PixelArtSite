@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { DrawingService } from '../service/drawing.service';
 import { Drawing } from '../model/drawing.model';
 import { DrawingViewComponent } from '../drawing-view/drawing-view.component';
@@ -7,7 +6,7 @@ import { DrawingViewComponent } from '../drawing-view/drawing-view.component';
 @Component({
   selector: 'app-gallery',
   standalone: true,
-  imports: [DrawingViewComponent, RouterLink],
+  imports: [DrawingViewComponent],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.css',
 })

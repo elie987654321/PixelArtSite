@@ -1,0 +1,67 @@
+<div class="page">
+  <header class="masthead">
+    <p class="eyebrow">PixelArt &middot; new drawing</p>
+    <h1 class="title">Canvas options.</h1>
+  </header>
+
+  <main>
+    @if (!chosen) {
+      <form class="options" (ngSubmit)="submit()">
+        <fieldset class="group">
+          <legend class="group-label">Name</legend>
+          <label class="field">
+            <span class="field-label">Drawing name</span>
+            <input
+              class="field-input field-input--text"
+              type="text"
+              name="name"
+              [(ngModel)]="name"
+              [maxlength]="maxNameLength"
+              placeholder="Untitled"
+            />
+          </label>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend class="group-label">Size</legend>
+          <div class="fields">
+            <label class="field">
+              <span class="field-label">Width</span>
+              <input
+                class="field-input"
+                type="number"
+                name="width"
+                [(ngModel)]="width"
+                [min]="min"
+                [max]="max"
+              />
+            </label>
+
+            <span class="times" aria-hidden="true">&times;</span>
+
+            <label class="field">
+              <span class="field-label">Height</span>
+              <input
+                class="field-input"
+                type="number"
+                name="height"
+                [(ngModel)]="height"
+                [min]="min"
+                [max]="max"
+              />
+            </label>
+          </div>
+        </fieldset>
+
+        @if (error) {
+          <p class="error">{{ error }}</p>
+        }
+
+        <button class="submit" type="submit">Start drawing</button>
+      </form>
+    } @else {
+      <p class="status">“{{ chosen.name }}” — canvas {{ chosen.width }}&times;{{ chosen.height }} ready.</p>
+      <p class="hint">The drawing canvas isn't built yet — that's the next step.</p>
+    }
+  </main>
+</div>
