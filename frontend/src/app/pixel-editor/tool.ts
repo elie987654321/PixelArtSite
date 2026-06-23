@@ -1,19 +1,18 @@
 import { InjectionToken } from '@angular/core';
-import { Pixel } from '../model/drawing.model';
 
-export const TRANSPARENT: Pixel = '#00000000';
+export const TRANSPARENT: string = '#00000000';
 
 export interface PixelEdit {
   x: number;
   y: number;
-  pixel: Pixel;
+  pixel: string;
 }
 
 export interface ToolContext {
   x: number;
   y: number;
   color: string;
-  grid: Pixel[][];
+  grid: string[][];
   width: number;
   height: number;
 }

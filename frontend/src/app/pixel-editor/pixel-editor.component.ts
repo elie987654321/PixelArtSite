@@ -7,13 +7,11 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Pixel } from '../model/drawing.model';
 import { Tool, TOOLS, TRANSPARENT } from './tool';
-import { cellFromEvent } from './cell-selection';
+import { Cell, cellFromClick, lineCells } from './cell-selection';
 import { PencilTool } from './tools/pencil-tool';
 import { EraserTool } from './tools/eraser-tool';
 import { BrushTool } from './tools/brush-tool';
-import { FillTool } from './tools/fill-tool';
 
 @Component({
   selector: 'app-pixel-editor',
@@ -21,11 +19,11 @@ import { FillTool } from './tools/fill-tool';
   imports: [FormsModule],
   templateUrl: './pixel-editor.component.html',
   styleUrl: './pixel-editor.component.css',
-  providers: [
+  providers: 
+  [
     { provide: TOOLS, useClass: PencilTool, multi: true },
     { provide: TOOLS, useClass: EraserTool, multi: true },
-    { provide: TOOLS, useClass: BrushTool, multi: true },
-    { provide: TOOLS, useClass: FillTool, multi: true },
+    { provide: TOOLS, useClass: BrushTool, multi: true }
   ],
 })
 export class PixelEditorComponent implements AfterViewInit {
@@ -37,8 +35,9 @@ export class PixelEditorComponent implements AfterViewInit {
 
   private ctx!: CanvasRenderingContext2D;
   private painting = false;
+  private lastCell: Cell | null = null;
 
-  grid: Pixel[][] = [];
+  grid: string[][] = [];
   color = '#e6284a';
   activeTool: Tool;
 
@@ -68,22 +67,31 @@ export class PixelEditorComponent implements AfterViewInit {
   }
 
   startPaint(event: MouseEvent): void {
+    const cell = cellFromClick(event, this.canvasRef.nativeElement, this.width, this.height);
+    if (!cell) return;
     this.painting = true;
-    this.paintAt(event);
+    this.lastCell = cell;
+    this.paintCell(cell);
   }
 
   paintMove(event: MouseEvent): void {
-    if (this.painting) this.paintAt(event);
+    if (!this.painting) return;
+    const cell = cellFromClick(event, this.canvasRef.nativeElement, this.width, this.height);
+    if (!cell) return;
+
+    const from = this.lastCell ?? cell;
+    for (const c of lineCells(from, cell)) {
+      this.paintCell(c);
+    }
+    this.lastCell = cell;
   }
 
   stopPaint(): void {
     this.painting = false;
+    this.lastCell = null;
   }
 
-  private paintAt(event: MouseEvent): void {
-    const cell = cellFromEvent(event, this.canvasRef.nativeElement, this.width, this.height);
-    if (!cell) return;
-
+  private paintCell(cell: Cell): void {
     const edits = this.activeTool.apply({
       x: cell.x,
       y: cell.y,
@@ -101,7 +109,7 @@ export class PixelEditorComponent implements AfterViewInit {
     }
   }
 
-  private makeEmptyGrid(): Pixel[][] {
+  private makeEmptyGrid(): string[][] {
     return Array.from({ length: this.height }, () =>
       Array.from({ length: this.width }, () => TRANSPARENT),
     );
