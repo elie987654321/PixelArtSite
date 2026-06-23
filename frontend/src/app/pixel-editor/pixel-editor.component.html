@@ -25,8 +25,7 @@
       class="canvas"
       (mousedown)="beginStroke($event)"
       (mousemove)="extendStroke($event)"
-      (mouseup)="endStroke()"
-      (mouseleave)="endStroke()"
+      (mouseleave)="onCanvasLeave()"
     ></canvas>
   </div>
 </div>

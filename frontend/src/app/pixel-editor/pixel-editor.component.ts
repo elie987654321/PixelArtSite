@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  HostListener,
   Inject,
   Input,
   ViewChild,
@@ -86,11 +87,19 @@ export class PixelEditorComponent implements AfterViewInit {
     }
     this.lastCell = cell;
   }
-
+  
+  @HostListener('document:mouseup')
   endStroke(): void {
     this.strokeInProgress = false;
     this.lastCell = null;
   }
+
+  // Leaving the canvas breaks line continuity so re-entering elsewhere
+  // doesn't draw a line across the gap (the stroke itself stays active).
+  onCanvasLeave(): void {
+    this.lastCell = null;
+  }
+
 
   private applyToolAt(cell: Cell): void {
     const edits = this.activeTool.getEdits({
