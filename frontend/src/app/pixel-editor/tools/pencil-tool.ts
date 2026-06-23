@@ -5,7 +5,7 @@ import { PixelEdit, Tool, ToolContext } from '../tool';
 export class PencilTool implements Tool {
   readonly name = 'pencil';
 
-  apply(ctx: ToolContext): PixelEdit[] {
+  getEdits(ctx: ToolContext): PixelEdit[] {
     return [{ x: ctx.x, y: ctx.y, pixel: ctx.color + 'ff' }];
   }
 }

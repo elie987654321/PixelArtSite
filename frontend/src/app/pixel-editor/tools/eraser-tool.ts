@@ -5,7 +5,7 @@ import { PixelEdit, Tool, ToolContext, TRANSPARENT } from '../tool';
 export class EraserTool implements Tool {
   readonly name = 'eraser';
 
-  apply(ctx: ToolContext): PixelEdit[] {
+  getEdits(ctx: ToolContext): PixelEdit[] {
     return [{ x: ctx.x, y: ctx.y, pixel: TRANSPARENT }];
   }
 }

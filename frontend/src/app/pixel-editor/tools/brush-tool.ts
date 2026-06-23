@@ -6,7 +6,7 @@ import { PixelEdit, Tool, ToolContext } from '../tool';
 export class BrushTool implements Tool {
   readonly name = 'brush';
 
-  apply(ctx: ToolContext): PixelEdit[] {
+  getEdits(ctx: ToolContext): PixelEdit[] {
     const pixel = ctx.color + 'ff';
     const edits: PixelEdit[] = [];
     for (let dy = -1; dy <= 1; dy++) {

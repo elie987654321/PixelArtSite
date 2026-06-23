@@ -23,10 +23,10 @@
     <canvas
       #canvas
       class="canvas"
-      (mousedown)="startPaint($event)"
-      (mousemove)="paintMove($event)"
-      (mouseup)="stopPaint()"
-      (mouseleave)="stopPaint()"
+      (mousedown)="beginStroke($event)"
+      (mousemove)="extendStroke($event)"
+      (mouseup)="endStroke()"
+      (mouseleave)="endStroke()"
     ></canvas>
   </div>
 </div>

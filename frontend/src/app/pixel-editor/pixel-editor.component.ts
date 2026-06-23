@@ -34,7 +34,7 @@ export class PixelEditorComponent implements AfterViewInit {
   private canvasRef!: ElementRef<HTMLCanvasElement>;
 
   private ctx!: CanvasRenderingContext2D;
-  private painting = false;
+  private strokeInProgress = false;
   private lastCell: Cell | null = null;
 
   grid: string[][] = [];
@@ -52,6 +52,7 @@ export class PixelEditorComponent implements AfterViewInit {
     canvas.width = this.width;
     canvas.height = this.height;
 
+    
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     this.ctx = ctx;
@@ -66,33 +67,33 @@ export class PixelEditorComponent implements AfterViewInit {
     this.ctx.clearRect(0, 0, this.width, this.height);
   }
 
-  startPaint(event: MouseEvent): void {
+  beginStroke(event: MouseEvent): void {
     const cell = cellFromClick(event, this.canvasRef.nativeElement, this.width, this.height);
     if (!cell) return;
-    this.painting = true;
+    this.strokeInProgress = true;
     this.lastCell = cell;
-    this.paintCell(cell);
+    this.applyToolAt(cell);
   }
 
-  paintMove(event: MouseEvent): void {
-    if (!this.painting) return;
+  extendStroke(event: MouseEvent): void {
+    if (!this.strokeInProgress) return;
     const cell = cellFromClick(event, this.canvasRef.nativeElement, this.width, this.height);
     if (!cell) return;
 
     const from = this.lastCell ?? cell;
     for (const c of lineCells(from, cell)) {
-      this.paintCell(c);
+      this.applyToolAt(c);
     }
     this.lastCell = cell;
   }
 
-  stopPaint(): void {
-    this.painting = false;
+  endStroke(): void {
+    this.strokeInProgress = false;
     this.lastCell = null;
   }
 
-  private paintCell(cell: Cell): void {
-    const edits = this.activeTool.apply({
+  private applyToolAt(cell: Cell): void {
+    const edits = this.activeTool.getEdits({
       x: cell.x,
       y: cell.y,
       color: this.color,
@@ -103,7 +104,7 @@ export class PixelEditorComponent implements AfterViewInit {
 
     for (const edit of edits) {
       this.grid[edit.y][edit.x] = edit.pixel;
-      this.ctx.clearRect(edit.x, edit.y, 1, 1);
+      this.ctx.clearRect(edit.x, edit.y,1 ,1);
       this.ctx.fillStyle = edit.pixel;
       this.ctx.fillRect(edit.x, edit.y, 1, 1);
     }
