@@ -2,9 +2,11 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  EventEmitter,
   HostListener,
   Inject,
   Input,
+  Output,
   ViewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -30,6 +32,7 @@ import { BrushTool } from './tools/brush-tool';
 export class PixelEditorComponent implements AfterViewInit {
   @Input({ required: true }) width!: number;
   @Input({ required: true }) height!: number;
+  @Output() save = new EventEmitter<string[][]>();
 
   @ViewChild('canvas', { static: true })
   private canvasRef!: ElementRef<HTMLCanvasElement>;
