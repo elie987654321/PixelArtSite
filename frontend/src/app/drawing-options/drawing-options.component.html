@@ -5,75 +5,58 @@
   </header>
 
   <main>
-    @if (!chosen) {
-      <form class="options" (ngSubmit)="submit()">
-        <fieldset class="group">
-          <legend class="group-label">Name</legend>
+    <form class="options" (ngSubmit)="submit()">
+      <fieldset class="group">
+        <legend class="group-label">Name</legend>
+        <label class="field">
+          <span class="field-label">Drawing name</span>
+          <input
+            class="field-input field-input--text"
+            type="text"
+            name="name"
+            [(ngModel)]="name"
+            [maxlength]="maxNameLength"
+            placeholder="Untitled"
+          />
+        </label>
+      </fieldset>
+
+      <fieldset class="group">
+        <legend class="group-label">Size</legend>
+        <div class="fields">
           <label class="field">
-            <span class="field-label">Drawing name</span>
+            <span class="field-label">Width</span>
             <input
-              class="field-input field-input--text"
-              type="text"
-              name="name"
-              [(ngModel)]="name"
-              [maxlength]="maxNameLength"
-              placeholder="Untitled"
+              class="field-input"
+              type="number"
+              name="width"
+              [(ngModel)]="width"
+              [min]="min"
+              [max]="max"
             />
           </label>
-        </fieldset>
 
-        <fieldset class="group">
-          <legend class="group-label">Size</legend>
-          <div class="fields">
-            <label class="field">
-              <span class="field-label">Width</span>
-              <input
-                class="field-input"
-                type="number"
-                name="width"
-                [(ngModel)]="width"
-                [min]="min"
-                [max]="max"
-              />
-            </label>
+          <span class="times" aria-hidden="true">&times;</span>
 
-            <span class="times" aria-hidden="true">&times;</span>
+          <label class="field">
+            <span class="field-label">Height</span>
+            <input
+              class="field-input"
+              type="number"
+              name="height"
+              [(ngModel)]="height"
+              [min]="min"
+              [max]="max"
+            />
+          </label>
+        </div>
+      </fieldset>
 
-            <label class="field">
-              <span class="field-label">Height</span>
-              <input
-                class="field-input"
-                type="number"
-                name="height"
-                [(ngModel)]="height"
-                [min]="min"
-                [max]="max"
-              />
-            </label>
-          </div>
-        </fieldset>
-
-        @if (error) {
-          <p class="error">{{ error }}</p>
-        }
-
-        <button class="submit" type="submit">Start drawing</button>
-      </form>
-    } @else {
-      <p class="status">“{{ chosen.name }}” — {{ chosen.width }}&times;{{ chosen.height }}</p>
-      <app-pixel-editor
-        [width]="chosen.width"
-        [height]="chosen.height"
-        (save)="onSave($event)"
-      />
-      @if (saving) {
-        <p class="status">Saving…</p>
-      } @else if (saved) {
-        <p class="status">Saved ✓</p>
+      @if (error) {
+        <p class="error">{{ error }}</p>
       }
-      @if (saveError) {
-        <p class="error">{{ saveError }}</p>
-      }
-    }
+
+      <button class="submit" type="submit">Start drawing</button>
+    </form>
   </main>
 </div>

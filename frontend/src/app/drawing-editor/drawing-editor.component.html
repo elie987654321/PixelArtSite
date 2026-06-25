@@ -1,0 +1,21 @@
+<div class="page">
+  <header class="masthead">
+    <p class="eyebrow"><a routerLink="/" class="link">PixelArt</a> &middot; editor</p>
+    <h1 class="title">{{ name }}</h1>
+  </header>
+
+  <main>
+    <p class="status">{{ width }}&times;{{ height }}</p>
+
+    <app-pixel-editor [width]="width" [height]="height" (save)="onSave($event)" />
+
+    @if (saving) {
+      <p class="status">Saving…</p>
+    } @else if (saved) {
+      <p class="status">Saved ✓</p>
+    }
+    @if (saveError) {
+      <p class="error">{{ saveError }}</p>
+    }
+  </main>
+</div>
