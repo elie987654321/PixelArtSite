@@ -81,6 +81,12 @@ export class PixelEditorComponent implements AfterViewInit {
     if (!this.strokeInProgress) return;
     const cell = cellFromClick(event, this.canvasRef.nativeElement, this.width, this.height);
     if (!cell) {
+      if (this.lastCell) {
+        const edge = nearestEdgeCell(this.lastCell, this.width, this.height);
+        for (const c of lineCells(this.lastCell, edge)) {
+          this.applyToolAt(c);
+        }
+      }
       this.lastCell = null;
       return;
     }
