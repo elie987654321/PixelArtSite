@@ -61,7 +61,19 @@
       </form>
     } @else {
       <p class="status">“{{ chosen.name }}” — {{ chosen.width }}&times;{{ chosen.height }}</p>
-      <app-pixel-editor [width]="chosen.width" [height]="chosen.height" />
+      <app-pixel-editor
+        [width]="chosen.width"
+        [height]="chosen.height"
+        (save)="onSave($event)"
+      />
+      @if (saving) {
+        <p class="status">Saving…</p>
+      } @else if (saved) {
+        <p class="status">Saved ✓</p>
+      }
+      @if (saveError) {
+        <p class="error">{{ saveError }}</p>
+      }
     }
   </main>
 </div>

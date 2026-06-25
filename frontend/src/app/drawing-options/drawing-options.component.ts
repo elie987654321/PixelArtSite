@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PixelEditorComponent } from '../pixel-editor/pixel-editor.component';
+import { DrawingService } from '../service/drawing.service';
 
 export interface DrawingOptions {
   name: string;
@@ -25,11 +26,42 @@ export class DrawingOptionsComponent {
   height = 16;
   error?: string;
   chosen?: DrawingOptions;
+  saving = false;
+  saved = false;
+  saveError?: string;
+
+  constructor(private readonly drawingService: DrawingService) {}
 
   submit(): void {
     this.error = this.validate();
     if (this.error) return;
     this.chosen = { name: this.name.trim(), width: this.width, height: this.height };
+  }
+
+  onSave(pixels: string[][]): void {
+    if (!this.chosen || this.saving) return;
+    this.saving = true;
+    this.saved = false;
+    this.saveError = undefined;
+
+    this.drawingService
+      .create({
+        name: this.chosen.name,
+        width: this.chosen.width,
+        height: this.chosen.height,
+        pixels,
+      })
+      .subscribe({
+        next: () => {
+          this.saving = false;
+          this.saved = true;
+        },
+        error: (err) => {
+          console.error(err);
+          this.saving = false;
+          this.saveError = 'Could not save the drawing.';
+        },
+      });
   }
 
   private validate(): string | undefined {

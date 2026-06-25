@@ -1,21 +1,21 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Drawing } from '../model/drawing.model';
+import { Drawing, NewDrawing } from '../model/drawing.model';
+import { DrawingRepository } from '../repository/drawing.repository';
 
 @Injectable({ providedIn: 'root' })
 export class DrawingService {
-  // The API runs on a different origin (hence the CORS policy on the backend).
-  // In the browser this must be the host-mapped port, not the in-container hostname.
-  private readonly baseUrl = 'http://localhost:5126/api/drawings';
-
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly repository: DrawingRepository) {}
 
   getAll(): Observable<Drawing[]> {
-    return this.http.get<Drawing[]>(this.baseUrl);
+    return this.repository.getAll();
   }
 
   getById(id: number): Observable<Drawing> {
-    return this.http.get<Drawing>(`${this.baseUrl}/${id}`);
+    return this.repository.getById(id);
+  }
+
+  create(drawing: NewDrawing): Observable<Drawing> {
+    return this.repository.create(drawing);
   }
 }
