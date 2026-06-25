@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Tool, TOOLS, TRANSPARENT } from './tool';
-import { Cell, cellFromClick, lineCells } from './cell-selection';
+import { Cell, cellFromClick, lineCells, nearestEdgeCell } from './cell-selection';
 import { PencilTool } from './tools/pencil-tool';
 import { EraserTool } from './tools/eraser-tool';
 import { BrushTool } from './tools/brush-tool';
@@ -76,12 +76,16 @@ export class PixelEditorComponent implements AfterViewInit {
     this.applyToolAt(cell);
   }
 
+  @HostListener('document:mousemove', ['$event'])
   extendStroke(event: MouseEvent): void {
     if (!this.strokeInProgress) return;
     const cell = cellFromClick(event, this.canvasRef.nativeElement, this.width, this.height);
-    if (!cell) return;
+    if (!cell) {
+      this.lastCell = null;
+      return;
+    }
 
-    const from = this.lastCell ?? cell;
+    const from = this.lastCell ?? nearestEdgeCell(cell, this.width, this.height);
     for (const c of lineCells(from, cell)) {
       this.applyToolAt(c);
     }
@@ -91,12 +95,6 @@ export class PixelEditorComponent implements AfterViewInit {
   @HostListener('document:mouseup')
   endStroke(): void {
     this.strokeInProgress = false;
-    this.lastCell = null;
-  }
-
-  // Leaving the canvas breaks line continuity so re-entering elsewhere
-  // doesn't draw a line across the gap (the stroke itself stays active).
-  onCanvasLeave(): void {
     this.lastCell = null;
   }
 

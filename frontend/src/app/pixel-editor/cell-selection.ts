@@ -26,6 +26,27 @@ export function cellFromClick(
   return { x, y };
 }
 
+// The cell on the nearest edge, level with the given cell.
+export function nearestEdgeCell(cell: Cell, gridWidth: number, gridHeight: number): Cell {
+  const toLeft = cell.x;
+  const toRight = gridWidth - 1 - cell.x;
+  const toTop = cell.y;
+  const toBottom = gridHeight - 1 - cell.y;
+  const nearest = Math.min(toLeft, toRight, toTop, toBottom);
+
+  let edgeCell: Cell;
+  if (nearest === toLeft) {
+    edgeCell = { x: 0, y: cell.y };
+  } else if (nearest === toRight) {
+    edgeCell = { x: gridWidth - 1, y: cell.y };
+  } else if (nearest === toTop) {
+    edgeCell = { x: cell.x, y: 0 };
+  } else {
+    edgeCell = { x: cell.x, y: gridHeight - 1 };
+  }
+  return edgeCell;
+}
+
 // All cells on the straight line from `from` to `to` (inclusive), via the DDA
 // algorithm — used to fill gaps between fast-moving mouse-move events.
 export function lineCells(from: Cell, to: Cell): Cell[] {
