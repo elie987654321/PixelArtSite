@@ -1,10 +1,10 @@
 namespace PixelArt.Api.Models;
 
-// Structural helpers for a jagged pixel grid (Pixel[][]).
-// Used by EF's value comparer to track changes without serializing to JSON.
+// Structural compare/hash/copy for a jagged pixel grid (string[][] of hex colours),
+// used by EF's value comparer to track changes without serializing to JSON.
 public static class PixelGrid
 {
-    public static bool AreEqual(Pixel[][]? a, Pixel[][]? b)
+    public static bool AreEqual(string[][]? a, string[][]? b)
     {
         if (a is null && b is null) return true;
         if (a is null || b is null) return false;
@@ -21,17 +21,13 @@ public static class PixelGrid
 
             for (var x = 0; x < rowA.Length; x++)
             {
-                var pa = rowA[x];
-                var pb = rowB[x];
-                if (pa is null && pb is null) continue;
-                if (pa is null || pb is null) return false;
-                if (pa.R != pb.R || pa.G != pb.G || pa.B != pb.B || pa.A != pb.A) return false;
+                if (rowA[x] != rowB[x]) return false;
             }
         }
         return true;
     }
 
-    public static int ComputeHashCode(Pixel[][] grid)
+    public static int ComputeHashCode(string[][] grid)
     {
         var hash = new HashCode();
         foreach (var row in grid)
@@ -39,34 +35,19 @@ public static class PixelGrid
             if (row is null) { hash.Add(0); continue; }
             foreach (var pixel in row)
             {
-                if (pixel is null) { hash.Add(0); continue; }
-                hash.Add(pixel.R);
-                hash.Add(pixel.G);
-                hash.Add(pixel.B);
-                hash.Add(pixel.A);
+                hash.Add(pixel);
             }
         }
         return hash.ToHashCode();
     }
 
-    
-    public static Pixel[][] DeepCopy(Pixel[][] grid)
+    public static string[][] DeepCopy(string[][] grid)
     {
-        var copy = new Pixel[grid.Length][];
+        var copy = new string[grid.Length][];
         for (var y = 0; y < grid.Length; y++)
         {
             var row = grid[y];
-            if (row is null) { copy[y] = null!; continue; }
-
-            var rowCopy = new Pixel[row.Length];
-            for (var x = 0; x < row.Length; x++)
-            {
-                var p = row[x];
-                rowCopy[x] = p is null
-                    ? null!
-                    : new Pixel { R = p.R, G = p.G, B = p.B, A = p.A };
-            }
-            copy[y] = rowCopy;
+            copy[y] = row is null ? null! : (string[])row.Clone();
         }
         return copy;
     }

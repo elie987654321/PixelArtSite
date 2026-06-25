@@ -8,9 +8,10 @@ public class Drawing
 
     public int Width { get; set; }
 
-    public int Height { get; set;} 
+    public int Height { get; set; }
 
-    public Pixel[][] Pixels { get; set; } = [];
+    //Each pixel is represented by its hexadecimal value
+    public string[][] Pixels { get; set; } = [];
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

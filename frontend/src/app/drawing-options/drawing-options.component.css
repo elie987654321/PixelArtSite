@@ -1,0 +1,128 @@
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 5vw, 4rem) 1.5rem 4rem;
+}
+
+.masthead {
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(2.25rem, 7vw, 4rem);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.group {
+  margin: 0;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--line);
+}
+
+.group-label {
+  padding: 0 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.fields {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.field-label {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.field-input {
+  width: 6rem;
+  padding: 0.6rem 0.75rem;
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  color: var(--text);
+  background: #1a1a22;
+  border: 1px solid var(--line);
+  outline: none;
+}
+
+.field-input:focus {
+  border-color: var(--accent);
+}
+
+.field-input--text {
+  width: 18rem;
+  max-width: 100%;
+}
+
+.times {
+  padding-bottom: 0.7rem;
+  font-family: var(--mono);
+  color: var(--muted);
+}
+
+.error {
+  margin: 0;
+  color: #ff6b6b;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+}
+
+.status {
+  font-family: var(--mono);
+  color: var(--muted);
+}
+
+.hint {
+  margin-top: 0.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.submit {
+  padding: 0.7rem 1.25rem;
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #141418;
+  background: var(--accent);
+  border: none;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+
+.submit:hover {
+  filter: brightness(1.08);
+}

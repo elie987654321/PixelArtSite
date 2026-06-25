@@ -1,0 +1,29 @@
+<div class="editor">
+  <div class="toolbar">
+    <label class="tool">
+      <span class="tool-label">Color</span>
+      <input class="color-input" type="color" [(ngModel)]="color" />
+    </label>
+
+    @for (tool of tools; track tool.name) {
+      <button
+        type="button"
+        class="tool-button"
+        [class.active]="tool === activeTool"
+        (click)="selectTool(tool)"
+      >
+        {{ tool.name }}
+      </button>
+    }
+
+    <button type="button" class="tool-button" (click)="clear()">clear</button>
+  </div>
+
+  <div class="canvas-frame">
+    <canvas
+      #canvas
+      class="canvas"
+      (mousedown)="beginStroke($event)"
+    ></canvas>
+  </div>
+</div>
