@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Drawing, NewDrawing } from '../model/drawing.model';
+import { Drawing, DrawingInput } from '../model/drawing.model';
 import { DrawingRepository } from '../repository/drawing.repository';
 
 @Injectable({ providedIn: 'root' })
@@ -15,7 +15,11 @@ export class DrawingService {
     return this.repository.getById(id);
   }
 
-  create(drawing: NewDrawing): Observable<Drawing> {
+  create(drawing: DrawingInput): Observable<Drawing> {
     return this.repository.create(drawing);
+  }
+
+  update(id: number, drawing: DrawingInput): Observable<void> {
+    return this.repository.update(id, drawing);
   }
 }

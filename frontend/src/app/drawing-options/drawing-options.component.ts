@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PixelEditorComponent } from '../pixel-editor/pixel-editor.component';
 import { DrawingService } from '../service/drawing.service';
+import { DrawingInput } from '../model/drawing.model';
 
 export interface DrawingOptions {
   name: string;
@@ -29,6 +30,7 @@ export class DrawingOptionsComponent {
   saving = false;
   saved = false;
   saveError?: string;
+  savedId?: number;
 
   constructor(private readonly drawingService: DrawingService) {}
 
@@ -36,6 +38,7 @@ export class DrawingOptionsComponent {
     this.error = this.validate();
     if (this.error) return;
     this.chosen = { name: this.name.trim(), width: this.width, height: this.height };
+    this.savedId = undefined;
   }
 
   onSave(pixels: string[][]): void {
@@ -44,24 +47,37 @@ export class DrawingOptionsComponent {
     this.saved = false;
     this.saveError = undefined;
 
-    this.drawingService
-      .create({
-        name: this.chosen.name,
-        width: this.chosen.width,
-        height: this.chosen.height,
-        pixels,
-      })
-      .subscribe({
+    const payload: DrawingInput = {
+      name: this.chosen.name,
+      width: this.chosen.width,
+      height: this.chosen.height,
+      pixels,
+    };
+
+    const onError = (err: unknown) => {
+      console.error(err);
+      this.saving = false;
+      this.saveError = 'Could not save the drawing.';
+    };
+
+    if (this.savedId === undefined) {
+      this.drawingService.create(payload).subscribe({
+        next: (created) => {
+          this.savedId = created.id;
+          this.saving = false;
+          this.saved = true;
+        },
+        error: onError,
+      });
+    } else {
+      this.drawingService.update(this.savedId, payload).subscribe({
         next: () => {
           this.saving = false;
           this.saved = true;
         },
-        error: (err) => {
-          console.error(err);
-          this.saving = false;
-          this.saveError = 'Could not save the drawing.';
-        },
+        error: onError,
       });
+    }
   }
 
   private validate(): string | undefined {

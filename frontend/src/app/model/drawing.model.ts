@@ -8,8 +8,9 @@ export interface Drawing {
   createdAt: string;
 }
 
-// The fields a client supplies to create a drawing (server sets id/createdAt).
-export interface NewDrawing {
+// The client-supplied fields of a drawing, used for both create and update
+// (server sets id/createdAt).
+export interface DrawingInput {
   name: string;
   width: number;
   height: number;
