@@ -1,0 +1,44 @@
+<div class="page">
+  <header class="masthead">
+    <p class="eyebrow">PixelArt &middot; sign in</p>
+    <h1 class="title">Welcome back.</h1>
+  </header>
+
+  <main>
+    <form class="options" (ngSubmit)="submit()">
+      <fieldset class="group">
+        <legend class="group-label">Credentials</legend>
+
+        <label class="field">
+          <span class="field-label">Username</span>
+          <input
+            class="field-input field-input--text"
+            type="text"
+            name="username"
+            autocomplete="username"
+            [(ngModel)]="username"
+          />
+        </label>
+
+        <label class="field">
+          <span class="field-label">Password</span>
+          <input
+            class="field-input field-input--text"
+            type="password"
+            name="password"
+            autocomplete="current-password"
+            [(ngModel)]="password"
+          />
+        </label>
+      </fieldset>
+
+      @if (error) {
+        <p class="error">{{ error }}</p>
+      }
+
+      <button class="submit" type="submit" [disabled]="submitting">
+        @if (submitting) { Signing in… } @else { Sign in }
+      </button>
+    </form>
+  </main>
+</div>
