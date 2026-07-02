@@ -18,10 +18,15 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Usernames must be unique so login can resolve a single account.
         modelBuilder.Entity<User>()
             .HasIndex(u => u.Username)
             .IsUnique();
+
+        modelBuilder.Entity<Drawing>()
+            .HasOne<User>()
+            .WithMany()
+            .HasForeignKey(d => d.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         var converter = new ValueConverter<string[][], string>(
             grid => JsonSerializer.Serialize(grid, (JsonSerializerOptions?)null),

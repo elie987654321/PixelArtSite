@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PixelArt.Api.Data;
@@ -17,18 +18,25 @@ public class DrawingsController : ControllerBase
         _db = db;
     }
 
+    // The id of the authenticated caller, taken from the JWT's subject claim.
+    private int CurrentUserId =>
+        int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
     // GET: api/drawings
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Drawing>>> GetAll()
     {
-        return await _db.Drawings.ToListAsync();
+        return await _db.Drawings
+            .Where(d => d.UserId == CurrentUserId)
+            .ToListAsync();
     }
 
     // GET: api/drawings/5
     [HttpGet("{id}")]
     public async Task<ActionResult<Drawing>> GetById(int id)
     {
-        var drawing = await _db.Drawings.FindAsync(id);
+        var drawing = await _db.Drawings
+            .FirstOrDefaultAsync(d => d.Id == id && d.UserId == CurrentUserId);
         if (drawing is null) return NotFound();
         return drawing;
     }
@@ -42,7 +50,8 @@ public class DrawingsController : ControllerBase
             Name = input.Name,
             Width = input.Width,
             Height = input.Height,
-            Pixels = input.Pixels
+            Pixels = input.Pixels,
+            UserId = CurrentUserId
         };
 
         _db.Drawings.Add(drawing);
@@ -54,7 +63,8 @@ public class DrawingsController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, DrawingCreateDto input)
     {
-        var drawing = await _db.Drawings.FindAsync(id);
+        var drawing = await _db.Drawings
+            .FirstOrDefaultAsync(d => d.Id == id && d.UserId == CurrentUserId);
         if (drawing is null) return NotFound();
 
         drawing.Name = input.Name;
@@ -70,7 +80,8 @@ public class DrawingsController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
-        var drawing = await _db.Drawings.FindAsync(id);
+        var drawing = await _db.Drawings
+            .FirstOrDefaultAsync(d => d.Id == id && d.UserId == CurrentUserId);
         if (drawing is null) return NotFound();
 
         _db.Drawings.Remove(drawing);

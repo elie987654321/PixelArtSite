@@ -14,4 +14,5 @@ public class Drawing
     public string[][] Pixels { get; set; } = [];
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public int UserId { get; set; }
 }
