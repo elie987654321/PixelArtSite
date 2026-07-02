@@ -1,1 +1,12 @@
+@if (authService.isLoggedIn()) {
+  <nav class="session">
+    <span class="session-user">{{ authService.username() }}</span>
+    <button class="session-logout" type="button" (click)="logout()">Log out</button>
+  </nav>
+} @else {
+  <nav class="session">
+    <a class="session-login" routerLink="/login">Sign in</a>
+  </nav>
+}
+
 <router-outlet />

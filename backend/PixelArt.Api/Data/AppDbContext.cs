@@ -14,8 +14,15 @@ public class AppDbContext : DbContext
 
     public DbSet<Drawing> Drawings => Set<Drawing>();
 
+    public DbSet<User> Users => Set<User>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // Usernames must be unique so login can resolve a single account.
+        modelBuilder.Entity<User>()
+            .HasIndex(u => u.Username)
+            .IsUnique();
+
         var converter = new ValueConverter<string[][], string>(
             grid => JsonSerializer.Serialize(grid, (JsonSerializerOptions?)null),
             json => JsonSerializer.Deserialize<string[][]>(json, (JsonSerializerOptions?)null) ?? Array.Empty<string[]>());
