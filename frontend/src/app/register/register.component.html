@@ -1,7 +1,7 @@
 <div class="page">
   <header class="masthead">
-    <p class="eyebrow">PixelArt &middot; sign in</p>
-    <h1 class="title">Welcome back.</h1>
+    <p class="eyebrow">PixelArt &middot; create account</p>
+    <h1 class="title">Get started.</h1>
   </header>
 
   <main>
@@ -26,8 +26,19 @@
             class="field-input field-input--text"
             type="password"
             name="password"
-            autocomplete="current-password"
+            autocomplete="new-password"
             [(ngModel)]="password"
+          />
+        </label>
+
+        <label class="field">
+          <span class="field-label">Confirm password</span>
+          <input
+            class="field-input field-input--text"
+            type="password"
+            name="confirmPassword"
+            autocomplete="new-password"
+            [(ngModel)]="confirmPassword"
           />
         </label>
       </fieldset>
@@ -37,13 +48,13 @@
       }
 
       <button class="submit" type="submit" [disabled]="submitting">
-        @if (submitting) { Signing in… } @else { Sign in }
+        @if (submitting) { Creating account… } @else { Create account }
       </button>
     </form>
 
     <p class="alt">
-      Need an account?
-      <a routerLink="/register">Create one</a>
+      Already have an account?
+      <a routerLink="/login">Sign in</a>
     </p>
   </main>
 </div>
