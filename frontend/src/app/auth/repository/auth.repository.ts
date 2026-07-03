@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AuthResponse, LoginRequest, RegisterRequest } from '../model/auth.model';
+import { AuthResponse, LoginRequest, RegisterRequest } from '../core/auth.model';
 
 // Data access for authentication: talks to the API, nothing else.
 @Injectable({ providedIn: 'root' })

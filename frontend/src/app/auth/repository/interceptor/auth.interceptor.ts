@@ -1,6 +1,6 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../../core/auth.service';
 
 // Attaches the stored JWT to every outgoing request so the secure-by-default
 // API accepts it. Requests without a token (e.g. login) pass through untouched.
