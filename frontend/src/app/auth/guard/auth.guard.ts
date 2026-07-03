@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../core/auth.service';
 
 // Blocks routes for anonymous visitors, redirecting them to the login page.
 export const authGuard: CanActivateFn = () => {
