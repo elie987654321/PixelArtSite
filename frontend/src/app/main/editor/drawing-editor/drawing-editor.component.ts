@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PixelEditorComponent } from '../pixel-editor/pixel-editor.component';
-import { DrawingService } from '../service/drawing.service';
-import { Drawing, DrawingInput } from '../model/drawing.model';
+import { DrawingService } from '../../../core/service/drawing.service';
+import { Drawing, DrawingInput } from '../../../core/model/drawing.model';
 
 @Component({
   selector: 'app-existing-drawing-editor-wrapper',
