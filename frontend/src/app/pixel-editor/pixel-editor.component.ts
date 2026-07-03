@@ -32,6 +32,7 @@ import { BrushTool } from './tools/brush-tool';
 export class PixelEditorComponent implements AfterViewInit {
   @Input({ required: true }) width!: number;
   @Input({ required: true }) height!: number;
+  @Input() initialGrid?: string[][];
   @Output() save = new EventEmitter<string[][]>();
 
   @ViewChild('canvas', { static: true })
@@ -50,16 +51,31 @@ export class PixelEditorComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.grid = this.makeEmptyGrid();
+    this.grid = this.initialGrid
+      ? this.initialGrid.map((row) => [...row])
+      : this.makeEmptyGrid();
 
     const canvas = this.canvasRef.nativeElement;
     canvas.width = this.width;
     canvas.height = this.height;
 
-    
+
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
     this.ctx = ctx;
+
+    this.renderGrid();
+  }
+
+  private renderGrid(): void {
+    for (let y = 0; y < this.height; y++) {
+      for (let x = 0; x < this.width; x++) {
+        const pixel = this.grid[y]?.[x];
+        if (!pixel || pixel === TRANSPARENT) continue;
+        this.ctx.fillStyle = pixel;
+        this.ctx.fillRect(x, y, 1, 1);
+      }
+    }
   }
 
   selectTool(tool: Tool): void {

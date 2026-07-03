@@ -27,24 +27,6 @@
   letter-spacing: -0.02em;
 }
 
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 2rem;
-}
-
-.gallery-item {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.15s, filter 0.15s;
-}
-
-.gallery-item:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.08);
-}
-
 .status {
   font-family: var(--mono);
   color: var(--muted);
@@ -54,17 +36,9 @@
   color: #ff6b6b;
 }
 
-.empty {
-  padding: 2.5rem 0;
-}
-
-.hint {
-  margin-top: 0.5rem;
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-code {
+.error {
+  margin: 0;
+  color: #ff6b6b;
   font-family: var(--mono);
-  color: var(--accent);
+  font-size: 0.8rem;
 }

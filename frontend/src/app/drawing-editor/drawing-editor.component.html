@@ -1,0 +1,32 @@
+<div class="page">
+  <header class="masthead">
+    <p class="eyebrow">PixelArt &middot; edit</p>
+    <h1 class="title">{{ drawing?.name ?? 'Drawing' }}</h1>
+  </header>
+
+  <main>
+    @if (loading) {
+      <p class="status">Loading…</p>
+    } @else if (loadError) {
+      <p class="status status--error">{{ loadError }}</p>
+    } @else if (drawing) {
+      <p class="status">{{ drawing.name }} — {{ drawing.width }}&times;{{ drawing.height }}</p>
+
+      <app-pixel-editor
+        [width]="drawing.width"
+        [height]="drawing.height"
+        [initialGrid]="drawing.pixels"
+        (save)="onSave($event)"
+      />
+
+      @if (saving) {
+        <p class="status">Saving…</p>
+      } @else if (saved) {
+        <p class="status">Saved ✓</p>
+      }
+      @if (saveError) {
+        <p class="error">{{ saveError }}</p>
+      }
+    }
+  </main>
+</div>
