@@ -4,6 +4,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { DrawingOptionsComponent } from './drawing-options/drawing-options.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ExistingDrawingEditorWrapper } from './drawing-editor/drawing-editor.component';
 import { authGuard } from './guard/auth.guard';
 
 export const routes: Routes = [
@@ -11,6 +12,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: '', component: HomeComponent, canActivate: [authGuard] },
   { path: 'drawings', component: GalleryComponent, canActivate: [authGuard] },
+  { path: 'drawings/:id', component: ExistingDrawingEditorWrapper, canActivate: [authGuard] },
   { path: 'create', component: DrawingOptionsComponent, canActivate: [authGuard] },
   { path: '**', redirectTo: '' },
 ];
