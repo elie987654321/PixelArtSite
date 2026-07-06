@@ -11,8 +11,23 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '', component: HomeComponent, canActivate: [authGuard] },
-  { path: 'drawings', component: GalleryComponent, canActivate: [authGuard] },
-  { path: 'drawings/:id', component: ExistingDrawingEditorWrapper, canActivate: [authGuard] },
-  { path: 'create', component: DrawingOptionsComponent, canActivate: [authGuard] },
+  {
+    path: 'drawings',
+    canActivate: [authGuard],
+    data: { breadcrumb: 'Gallery' },
+    children: [
+      { path: '', component: GalleryComponent },      
+      {
+        path: ':id',
+        component: ExistingDrawingEditorWrapper,
+        data: { breadcrumb: 'Drawing' },
+      },
+    ],
+  },
+  {
+    path: 'create',
+    component: DrawingOptionsComponent,
+    data: { breadcrumb: 'New drawing' },
+  },
   { path: '**', redirectTo: '' },
 ];
