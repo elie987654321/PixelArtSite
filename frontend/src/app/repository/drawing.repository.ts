@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Drawing, DrawingInput } from '../core/model/drawing.model';
+import { Drawing, DrawingInput } from '../model/drawing.model';
 
 // Data access for drawings: talks to the API, nothing else.
 @Injectable({ providedIn: 'root' })

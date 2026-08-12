@@ -25,7 +25,7 @@ services:
     container_name: pixelart-api
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
-      ConnectionStrings__Default: "Server=mssql,1433;Database=PixelArt;User Id=sa;Password=${MSSQL_SA_PASSWORD};TrustServerCertificate=True"
+      ConnectionStrings__Default: "Server=mssql,1433;Database=PixelArtV2;User Id=sa;Password=${MSSQL_SA_PASSWORD};TrustServerCertificate=True"
       Jwt__Key: "${JWT_KEY}"
     ports:
       - "5126:8080"

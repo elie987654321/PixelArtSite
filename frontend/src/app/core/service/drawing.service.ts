@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Drawing, DrawingInput } from '../model/drawing.model';
+import { Drawing, DrawingInput } from '../../model/drawing.model';
 import { DrawingRepository } from '../../repository/drawing.repository';
 
 @Injectable({ providedIn: 'root' })

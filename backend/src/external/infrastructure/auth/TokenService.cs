@@ -1,0 +1,43 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using PixelArt.Core.Abstraction.Auth;
+using PixelArt.Core.Domain.Entities;
+
+namespace PixelArt.External.Infrastructure.Auth;
+
+// Builds and signs the JWT a user receives on login.
+public class TokenService : ITokenService
+{
+    private readonly JwtSettings _settings;
+
+    public TokenService(IOptions<JwtSettings> settings)
+    {
+        _settings = settings.Value;
+    }
+
+    public string CreateToken(User user)
+    {
+        // The claims become the token's payload — identity only, no secrets.
+        var claims = new[]
+        {
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
+        };
+
+        // The key signs the token; the same key validates it on later requests.
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.Key));
+        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        var token = new JwtSecurityToken(
+            issuer: _settings.Issuer,
+            audience: _settings.Audience,
+            claims: claims,
+            expires: DateTime.UtcNow.AddMinutes(_settings.ExpiryMinutes),
+            signingCredentials: credentials);
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+}
