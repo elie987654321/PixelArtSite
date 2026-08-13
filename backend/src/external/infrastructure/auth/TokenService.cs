@@ -8,8 +8,7 @@ using PixelArt.Core.Domain.Entities;
 
 namespace PixelArt.External.Infrastructure.Auth;
 
-// Builds and signs the JWT a user receives on login.
-public class TokenService : ITokenService
+public sealed class TokenService : ITokenService
 {
     private readonly JwtSettings _settings;
 
@@ -20,14 +19,12 @@ public class TokenService : ITokenService
 
     public string CreateToken(User user)
     {
-        // The claims become the token's payload — identity only, no secrets.
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new Claim(JwtRegisteredClaimNames.UniqueName, user.Username),
         };
 
-        // The key signs the token; the same key validates it on later requests.
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.Key));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 

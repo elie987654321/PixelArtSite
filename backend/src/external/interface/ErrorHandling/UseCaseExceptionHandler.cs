@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Diagnostics;
-using PixelArt.Core.Application.Auth;
+using PixelArt.Core.Application.Auth.Exceptions;
 using PixelArt.Core.Application.Exceptions;
 
 namespace PixelArt.External.Interface.ErrorHandling;

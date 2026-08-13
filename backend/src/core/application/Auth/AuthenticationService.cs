@@ -1,10 +1,10 @@
 using PixelArt.Core.Abstraction.Auth;
 using PixelArt.Core.Abstraction.Persistence;
+using PixelArt.Core.Application.Auth.Exceptions;
 using PixelArt.Core.Domain.Entities;
 
 namespace PixelArt.Core.Application.Auth;
 
-// Register and login use cases. Orchestrates the ports; owns no I/O itself.
 public sealed class AuthenticationService
 {
     private readonly IUserRepository _users;
@@ -52,7 +52,6 @@ public sealed class AuthenticationService
     {
         var user = await _users.FindByUsernameAsync(username.Trim(), cancellationToken);
 
-        // Same failure for unknown user and bad password — don't leak which usernames exist.
         if (user is null || !_passwordHasher.Verify(password, user.PasswordHash))
             throw new InvalidCredentialsException();
 
