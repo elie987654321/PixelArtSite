@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DrawingService } from '../../core/service/drawing.service';
-import { Drawing } from '../../core/model/drawing.model';
+import { Drawing } from '../../model/drawing.model';
 import { DrawingViewComponent } from '../editor/drawing-view/drawing-view.component';
 
 @Component({

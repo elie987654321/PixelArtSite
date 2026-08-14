@@ -1,13 +1,8 @@
-# Build output
+# The archived backend is not part of the image
+old/
+
+# Build output — the image builds from source
 **/bin/
 **/obj/
 
-# IDE
-**/.vs/
-**/.idea/
 **/*.user
-
-# Misc
-**/.git/
-Dockerfile
-.dockerignore

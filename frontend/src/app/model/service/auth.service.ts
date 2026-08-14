@@ -1,7 +1,7 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { AuthResponse, LoginRequest, RegisterRequest } from '../../../auth/core/auth.model';
-import { AuthRepository } from '../../../auth/repository/auth.repository'; 
+import { AuthResponse, LoginRequest, RegisterRequest } from '../../auth/core/auth.model';
+import { AuthRepository } from '../../auth/repository/auth.repository'; 
 // Owns the authenticated session: persists the JWT and exposes reactive state.
 @Injectable({ providedIn: 'root' })
 export class AuthService {
