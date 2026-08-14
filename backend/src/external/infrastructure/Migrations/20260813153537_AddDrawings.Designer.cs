@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PixelArt.External.Infrastructure.Persistence;
 
@@ -11,9 +12,11 @@ using PixelArt.External.Infrastructure.Persistence;
 namespace PixelArt.External.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260813153537_AddDrawings")]
+    partial class AddDrawings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,7 +57,7 @@ namespace PixelArt.External.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Drawings", (string)null);
+                    b.ToTable("Drawings");
                 });
 
             modelBuilder.Entity("PixelArt.Core.Domain.Entities.User", b =>
@@ -81,7 +84,7 @@ namespace PixelArt.External.Infrastructure.Migrations
                     b.HasIndex("Username")
                         .IsUnique();
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("PixelArt.Core.Domain.Entities.Drawing", b =>

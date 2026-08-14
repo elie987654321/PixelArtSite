@@ -322,7 +322,7 @@ public static class DrawingPolicy
             throw new InvalidDrawingException($"Height must be between {MinimumDimension} and {MaximumDimension}.");
 
         if (pixels.Length != height)
-            throw new InvalidDrawingException($"Pixels must contain exactly {height} rows.");
+            throw new InvalidDrawingException($"The drawing must contain exactly {height} rows.");
 
         for (var y = 0; y < pixels.Length; y++)
         {
@@ -1261,7 +1261,7 @@ public class DrawingPolicyTests
         var ex = Assert.Throws<InvalidDrawingException>(
             () => Validate("art", 2, 3, ValidGrid()));
 
-        Assert.Equal("Pixels must contain exactly 3 rows.", ex.Message);
+        Assert.Equal("The drawing must contain exactly 3 rows.", ex.Message);
     }
 
     [Fact]

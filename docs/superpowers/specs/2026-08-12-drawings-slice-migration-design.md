@@ -58,7 +58,7 @@ The controller reads the caller's id from the JWT `sub` claim via
 | `Name` ≤ 100 characters | `Name must be at most 100 characters.` |
 | `Width` in 1..256 | `Width must be between 1 and 256.` |
 | `Height` in 1..256 | `Height must be between 1 and 256.` |
-| `Pixels.Length == Height` | `Pixels must contain exactly {height} rows.` |
+| `Pixels.Length == Height` | `The drawing must contain exactly {height} rows.` |
 | each row `Length == Width` | `Row {y} must contain exactly {width} pixels.` |
 | each cell matches `#RRGGBBAA` | `Pixel at row {y}, column {x} is not a #RRGGBBAA colour.` |
 

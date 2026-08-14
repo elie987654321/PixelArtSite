@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Diagnostics;
 using PixelArt.Core.Application.Auth.Exceptions;
+using PixelArt.Core.Application.Drawings.Exceptions;
 using PixelArt.Core.Application.Exceptions;
 
 namespace PixelArt.External.Interface.ErrorHandling;
@@ -30,6 +31,7 @@ public sealed class UseCaseExceptionHandler : IExceptionHandler
         {
             UsernameTakenException => StatusCodes.Status409Conflict,
             InvalidCredentialsException => StatusCodes.Status401Unauthorized,
+            DrawingNotFoundException => StatusCodes.Status404NotFound,
             _ => StatusCodes.Status400BadRequest
         };
 
