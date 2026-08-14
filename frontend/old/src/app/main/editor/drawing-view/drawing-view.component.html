@@ -1,0 +1,14 @@
+<figure class="drawing">
+  <div class="canvas-frame">
+    <canvas #canvas class="pixel-canvas"></canvas>
+  </div>
+
+  <figcaption class="meta">
+    <span class="name">{{ drawing.name }}</span>
+    <span class="dims">{{ drawing.width }}&times;{{ drawing.height }}</span>
+  </figcaption>
+
+  @if (error) {
+    <p class="error">{{ error }}</p>
+  }
+</figure>

@@ -1,0 +1,59 @@
+<div class="page">
+  <header class="masthead">
+    <h1 class="title">Get started.</h1>
+  </header>
+
+  <main>
+    <form class="options" (ngSubmit)="submit()">
+      <fieldset class="group">
+        <legend class="group-label">Credentials</legend>
+
+        <label class="field">
+          <span class="field-label">Username</span>
+          <input
+            class="field-input field-input--text"
+            type="text"
+            name="username"
+            autocomplete="username"
+            [(ngModel)]="username"
+          />
+        </label>
+
+        <label class="field">
+          <span class="field-label">Password</span>
+          <input
+            class="field-input field-input--text"
+            type="password"
+            name="password"
+            autocomplete="new-password"
+            [(ngModel)]="password"
+          />
+        </label>
+
+        <label class="field">
+          <span class="field-label">Confirm password</span>
+          <input
+            class="field-input field-input--text"
+            type="password"
+            name="confirmPassword"
+            autocomplete="new-password"
+            [(ngModel)]="confirmPassword"
+          />
+        </label>
+      </fieldset>
+
+      @if (error) {
+        <p class="error">{{ error }}</p>
+      }
+
+      <button class="submit" type="submit" [disabled]="submitting">
+        @if (submitting) { Creating account… } @else { Create account }
+      </button>
+    </form>
+
+    <p class="alt">
+      Already have an account?
+      <a routerLink="/login">Sign in</a>
+    </p>
+  </main>
+</div>

@@ -1,0 +1,12 @@
+@if (crumbs.length) {
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    @for (crumb of crumbs; track crumb.url; let last = $last) {
+      @if (last) {
+        <span class="crumb crumb--current" aria-current="page">{{ crumb.label }}</span>
+      } @else {
+        <a class="crumb" [routerLink]="crumb.url">{{ crumb.label }}</a>
+        <span class="sep" aria-hidden="true">&middot;</span>
+      }
+    }
+  </nav>
+}
