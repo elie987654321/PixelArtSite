@@ -20,6 +20,10 @@ public class AppDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<User>()
+            .Property(u => u.Username)
+            .HasMaxLength(User.UsernameMaximumLength);
+
+        modelBuilder.Entity<User>()
             .HasIndex(u => u.Username)
             .IsUnique();
 

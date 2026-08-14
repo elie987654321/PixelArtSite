@@ -4,7 +4,7 @@ namespace PixelArt.Core.Application.Auth.Exceptions;
 
 public sealed class InvalidUsernameException : UseCaseException
 {
-    public InvalidUsernameException() : base("Username cannot contain whitespace.")
+    public InvalidUsernameException(string reason) : base(reason)
     {
     }
 }

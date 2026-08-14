@@ -26,8 +26,7 @@ public sealed class AuthenticationService
         string password,
         CancellationToken cancellationToken = default)
     {
-        if (username.Any(char.IsWhiteSpace))
-            throw new InvalidUsernameException();
+        UsernamePolicy.Validate(username);
 
         PasswordPolicy.Validate(password);
 
