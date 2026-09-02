@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PixelEditorComponent } from '../pixel-editor/pixel-editor.component';
-import { DrawingService } from '../../../core/service/drawing.service';
+import { DrawingService } from '../../../services/drawing.service';
 import { Drawing, DrawingInput } from '../../../model/drawing.model';
 
 @Component({
