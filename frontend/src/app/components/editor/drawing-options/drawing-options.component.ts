@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PixelEditorComponent } from '../pixel-editor/pixel-editor.component';
-import { DrawingService } from '../../../core/service/drawing.service';
+import { DrawingService } from '../../../services/drawing.service';
 import { DrawingInput } from '../../../model/drawing.model';
 
 export interface DrawingOptions {

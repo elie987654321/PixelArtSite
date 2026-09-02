@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { AuthService } from './auth/core/auth.service';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { AuthService } from './services/auth.service';
+import { BreadcrumbComponent } from './components/ui/breadcrumb/breadcrumb.component';
 
 @Component({
   selector: 'app-root',

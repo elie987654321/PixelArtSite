@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { GalleryComponent } from './main/gallery/gallery.component';
-import { DrawingOptionsComponent } from './main/editor/drawing-options/drawing-options.component';
-import { LoginComponent } from '../auth/main/login/login.component';
-import { RegisterComponent } from '../auth/main/register/register.component';
-import { ExistingDrawingEditorWrapper } from './main/editor/drawing-editor/drawing-editor.component';
+import { HomeComponent } from '../components/home/home.component';
+import { GalleryComponent } from '../components/gallery/gallery.component';
+import { DrawingOptionsComponent } from '../components/editor/drawing-options/drawing-options.component';
+import { LoginComponent } from '../components/login/login.component';
+import { RegisterComponent } from '../components/register/register.component';
+import { ExistingDrawingEditorWrapper } from '../components/editor/drawing-editor/drawing-editor.component';
 import { authGuard } from './guard/auth.guard';
 
 export const routes: Routes = [
