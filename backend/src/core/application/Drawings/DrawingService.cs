@@ -5,7 +5,7 @@ using PixelArt.Core.Domain.Entities;
 
 namespace PixelArt.Core.Application.Drawings;
 
-public sealed class DrawingService
+public sealed class DrawingService : IDrawingService
 {
     private readonly IDrawingRepository _drawingRepository;
 
