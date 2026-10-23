@@ -5,7 +5,7 @@ using PixelArt.Core.Domain.Entities;
 
 namespace PixelArt.Core.Application.Auth;
 
-public sealed class AuthenticationService
+public sealed class AuthenticationService : IAuthenticationService
 {
     private readonly IUserRepository _users;
     private readonly IPasswordHasher _passwordHasher;

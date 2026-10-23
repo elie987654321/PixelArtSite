@@ -9,9 +9,9 @@ namespace PixelArt.External.Interface.Controllers;
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
-    private readonly AuthenticationService _auth;
+    private readonly IAuthenticationService _auth;
 
-    public AuthController(AuthenticationService auth)
+    public AuthController(IAuthenticationService auth)
     {
         _auth = auth;
     }

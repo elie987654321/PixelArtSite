@@ -9,9 +9,9 @@ namespace PixelArt.External.Interface.Controllers;
 [Route("api/[controller]")]
 public class DrawingsController : ControllerBase
 {
-    private readonly DrawingService _drawingService;
+    private readonly IDrawingService _drawingService;
 
-    public DrawingsController(DrawingService drawingService)
+    public DrawingsController(IDrawingService drawingService)
     {
         _drawingService = drawingService;
     }
