@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "permissions": {
-    "deny": [
+    "ask": [
       "Bash(git add *)",
       "Bash(git am *)",
       "Bash(git apply *)",
@@ -113,7 +113,9 @@
       "PowerShell(gh release delete *)",
       "PowerShell(gh release upload *)",
       "PowerShell(gh api -X *)",
-      "PowerShell(gh api --method *)",
+      "PowerShell(gh api --method *)"
+    ],
+    "deny": [
       "Edit(.git/**)",
       "Write(.git/**)"
     ]
